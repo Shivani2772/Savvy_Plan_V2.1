@@ -6,7 +6,7 @@ export default class CreditScoreApp extends Component {
     render() {
         return (
             <CreditScore>
-                CreditScore details go here
+                Shivani will edit - CreditScore details go here
             </CreditScore>
         )
     }

@@ -6,7 +6,7 @@
     "cryptocompare": "^1.0.0",
     "font-awesome": "^4.7.0",
     "fontawesome": "^5.6.3",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.15",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-fontawesome": "^1.6.1",
@@ -14,8 +14,9 @@
     "react-router-dom": "^5.0.0",
     "react-scripts": "3.0.1",
     "redux": "^4.0.1",
-    "styled-components": "^4.2.0",
-    "styled-icons": "^8.1.0"
+    "styled-components": "^4.4.0",
+    "styled-icons": "^8.1.0",
+    "typescript": "^3.6.3"
   },
   "scripts": {
     "start": "react-scripts start",

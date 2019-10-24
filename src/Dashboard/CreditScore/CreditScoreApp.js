@@ -1,27 +1,29 @@
-import React, { Component } from 'react'
+import React from "react";
+import styled from "styled-components";
+import { ThemeProvider } from "styled-components";
+import { darkTheme, lightTheme } from "../../Styles/Themes";
+import CreditScore from "./CreditScore";
 
-import styled from "styled-components"
+const CreditScoreApp = () => {
+  return (
+    <ThemeProvider theme={lightTheme}>
+      <CreditScoreAppWrapper>
+        <CreditScore />
+      </CreditScoreAppWrapper>
+    </ThemeProvider>
+  );
+};
 
-export default class CreditScoreApp extends Component {
-    render() {
-        return (
-            <CreditScore>
-                Shivani will edit - CreditScore details go here
-            </CreditScore>
-        )
-    }
-}
-
-
-
-
+export default CreditScoreApp;
 
 //-----------------------------------------------STYLES-----------------------------------------------/
-export const CreditScore = styled.div`
-grid-area: m;
-background-color: yellow;
-display: grid;
-`
+export const CreditScoreAppWrapper = styled.div`
+  grid-area: m;
+  background-color: ${props => props.theme.color.background1};
+  /*   display: grid;
+  grid-template: repeat() (2, 50px) / 1fr 1fr 1fr;
+  grid-gap: 3px; */
+`;
 
 //-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_FILE DETAILS-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_-_//
 //blank slate

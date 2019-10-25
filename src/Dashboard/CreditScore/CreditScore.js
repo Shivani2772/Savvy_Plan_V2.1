@@ -4,6 +4,7 @@ import GoodCreditScore from "./GoodCreditScore";
 import BadCreditScore from "./BadCreditScore";
 import DonutChart from "../../assets/images/CreditScoreDonut.jpg";
 import BarChart from "../../assets/images/CreditScoreBar.png";
+import GraphChart from "../../assets/images/CreditGraph.png";
 
 export default class CreditScore extends Component {
   state = {
@@ -37,16 +38,25 @@ export default class CreditScore extends Component {
       <CreditScoreWrapper>
         <SectionsWrapper>
           <DonutBarChart>
-            <p>TransUnion Credit Score</p>
-            <img src={DonutChart} />
+            <h1>Credit Score</h1>
+            <img src={DonutChart} alt="donut" />
+            <p>
+              <u>Score Factors</u>
+            </p>
             <span>
               As of {this.state.date}.Based on Credit Vision Risk. Next update
               available on {this.state.nextDate}{" "}
             </span>
           </DonutBarChart>
           <DonutBarChart>
-            <p>Where You Stand</p>
-            <img src={BarChart} />
+            <h1>Where You Stand</h1>
+            <img src={BarChart} alt="bar" />
+          </DonutBarChart>
+        </SectionsWrapper>
+        <SectionsWrapper>
+          <DonutBarChart>
+            <h1>My Score History</h1>
+            <img src={GraphChart} alt="graph" />
           </DonutBarChart>
         </SectionsWrapper>
       </CreditScoreWrapper>
@@ -57,9 +67,7 @@ export default class CreditScore extends Component {
 //-----------------------------------------------STYLES-----------------------------------------------//
 
 const CreditScoreWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  justify-content: space-around;
   text-align: center;
 `;
 
@@ -67,20 +75,25 @@ const SectionsWrapper = styled.div`
   margin: 0rem auto;
   width: 100rem;
   display: flex;
+  flex-direction: row;
 `;
 
 const DonutBarChart = styled.div`
   font-size: ${props => props.theme.fontSize.medium};
   color: ${props => props.theme.color.text2};
   font-weight: 300;
+  padding: 3rem;
   display: flex;
   flex-direction: column;
-  flex: 2 1 20px;
-  padding: 3rem;
-  & p {
-    font-size: ${props => props.theme.fontSize.large};
+  & h1 {
+    font-size: ${props => props.theme.fontSize.medium};
+    font-weight: normal;
   }
   & span {
     font-size: ${props => props.theme.fontSize.small};
+  }
+  > img {
+    display: flex;
+    flex: 1 1 250px;
   }
 `;

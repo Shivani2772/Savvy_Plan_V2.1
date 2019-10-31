@@ -74,32 +74,36 @@ export const fontSizeLargest = 'font-size: 5rem';
 // export const darkTheme = {
 //     color: "green",
 // }
-export const darkTheme = {
+export const lightTheme = {
     color: {
-        background1: "#292f32",
-        background2: "#d4d4d4",
-        background3: "#586975",
-        background4: "#f4f3f2",
-        primaryBackground3: "#33363F",
-        primaryBackground4: "#1E202A",
-        accent1: '#66d9e8',
-        accent2: '#77919A',
-        accent3: '#7DA4B7',
-        accent4: '#D9BB73',
-        highlight1: '#ffd152',
-        highlight2: '#ef6c67',
-        highlight3: '#55869d',
-        text1: '#f4f3f2',
-        text2: '#93979d',
-        text3: '#1E202A',
+        background1: "white",
+        background2: "#FCFCFC",
+        background3: "#536D7A",
+        contrastBackground1: "#536D7A",
+        contrastBackground2: "#72929B",
+        contrastBackground3: "#556976",
+        sandy: '#ffd152',
+        salmon: '#F29278',
+        dullSteelBlue: '#55869d',
+        brightPopBlue: "#4BB9D0",
+        fadedGreyBlue: "#B0CFE3",
+        text1: '#F7F7F5',
+        text2: '#FFFFFF',
+        contrastText1: '#72929B',
+        contrastText2: '#536D7A',
     },
     fontSize: {
+        smallest: "1rem",
         small: "1.4rem",
         smallMedium: "1.8rem",
         medium: '2.2rem',
         mediumLarge: '3.5rem',
         large: '4.5rem',
+        large2: '6.5rem',
         largest: '9rem',
+    },
+    border: {
+        primary: ".2px solid #DCDCDC",
     },
     flexContent: {
         center: '{display: flex; align-items: center; justify-content:center}'
@@ -121,24 +125,20 @@ export const setFlex = ({align="center",justify="center"}) => {
     `
 }
 
-export const lightTheme = {
+export const darkTheme = {
     color: {
         background1: "#e8eaf0",
         background2: "#f9f8f6",
         background3: "#c6c7c7",
         background4: "#f4f3f2",
-        primaryBackground3: "#33363F",
-        primaryBackground4: "#1E202A",
-        accent1: '#66d9e8',
-        accent2: '#77919A',
-        accent3: '#7DA4B7',
-        accent4: '#D9BB73',
-        highlight1: '#586975',
-        highlight2: '#ef6c67',
-        highlight3: '#55869d',
-        text1: '#646c79',
+        contrastBackground1: "#33363F",
+        contrastBackground2: "#556976",
+        sandy: '#D9BB73',
+        salmon: '#ef6c67',
+        dullSteelBlue: '#55869d',
+        contrastText1: '#828F98',
         text2: '#33363F',
-        text3: '#f4f3f2',
+        text3: '#F7F7F5',
     },
     fontSize: {
         small: "1.4rem",
@@ -146,6 +146,7 @@ export const lightTheme = {
         medium: '2.2rem',
         mediumLarge: '3.5rem',
         large: '4.5rem',
+        large2: '7.5rem',
         largest: '9rem',
     },
     flexContent: {
@@ -183,8 +184,8 @@ export const color = {
 export const backgroundColor = {
     primaryDark1: 'background-color: #33363F',
     primaryDark2: 'background-color: #1E202A',
-    accent1: 'background-color: #66d9e8',
-    accent2: 'background-color: #77919A',
+    salmon: 'background-color: #66d9e8',
+    dullSteelBlue: 'background-color: #77919A',
     sandyBrown: 'background-color: #eab462',
     navyDark: 'background-color: #18212b',
     greyLight: 'background-color: #f5f5f5',

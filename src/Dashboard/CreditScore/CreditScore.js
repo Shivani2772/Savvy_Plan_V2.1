@@ -48,10 +48,15 @@ export default class CreditScore extends Component {
               available on {this.state.nextDate}{" "}
             </span>
           </DonutBarChart>
-          <DonutBarChart>
+          <ProgressBarContainer>
             <h1>Where You Stand</h1>
-            <img src={BarChart} alt="bar" />
-          </DonutBarChart>
+            {/* <img src={BarChart} alt="bar" /> */}
+            <ProgressBar>
+              <BarLines style="--bar-value:85%;"></BarLines>
+              <Barlines style="--bar-value:45%;"></BarLines>
+              <BarLines style="--bar-value:15%;"></BarLines>
+            </ProgressBar>
+          </ProgressBarContainer>
         </SectionsWrapper>
         <SectionsWrapper>
           <DonutBarChart>
@@ -96,4 +101,25 @@ const DonutBarChart = styled.div`
     display: flex;
     flex: 1 1 250px;
   }
+`;
+
+const ProgressBarContainer = styled(DonutBarChart)``;
+
+const ProgressBar = styled.div`
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: centre;
+  border-bottom: 2px solid #f16335;
+`;
+
+const BarLines = styled(ProgressBar)`
+  background-color: #f16335;
+  width: 45px;
+  height: var(--bar-value);
+  align-self: flex-end;
+  margin: 0 auto;
+  border-radius: 3px;
+  position: relative;
 `;

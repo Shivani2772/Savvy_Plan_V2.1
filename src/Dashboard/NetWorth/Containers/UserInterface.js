@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import Section from "./Section"
+import Control from "./Control"
 import styled from "styled-components"
 
  class NetWorthUserInterface extends Component {
 
     renderSections = (state) => {
-        return Object.values(state).slice(4).map((section, index) => <Section key={index} sectionProps={section}/>)
+        return Object.values(state).slice(4).map((section, index) => <Control key={index} sectionProps={section}/>)
     }
         /*
          Objective: map through state and receive props from state that render a unique section. This is done two times for each catagory.
@@ -91,7 +91,7 @@ const SectionWrapper = styled.div`
 `
 const NetWorthTotal = styled.div`
     font-size: ${props => props.theme.fontSize.largest};
-    color: ${props => props.theme.color.text2};
+    color: ${props => props.theme.color.contrastText1};
     font-weight: 300;
     display: flex;
     flex-direction: column;

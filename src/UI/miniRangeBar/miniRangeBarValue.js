@@ -1,9 +1,17 @@
 import React, { Component } from 'react'
 import styled from "styled-components"
+import {inverseLogslider} from "../../services/logorithmicFunctions"
 
- class RangeBarValue extends Component {
+ class MiniRangeBarValue extends Component {
     state = {
         valueAsInput: false,
+    }
+
+    setLocalRangeAndLogValue = (e) => {
+        
+        const inverseLogValue = inverseLogslider(e.target.value).toFixed()
+
+        this.props.handleSetParentRangeBarAndFinancialValue(e.target.name, e.target.value, inverseLogValue, this.props.rangeBarProps)
     }
     //state decides whether the label should be shown as an input or just a regular number. 
 
@@ -26,71 +34,48 @@ import styled from "styled-components"
       //If the user presses enter the new value will be submitted and it will turn from input back to regular number. 
 
     render() {
+     
         return (
-            <div>
-            {this.state.valueAsInput ? 
-             <ValueAsInput 
-                type="number"
-                id={this.props.rangeBarProps.id}
-                autoComplete="off"
-                onChange={this.props.handleChange}
-                value={this.props.rangeBarProps.financialValue}
-                onKeyDown={(event) => this.handleKeyDown(event)}
-                onBlur={this.toggleState}
-                
-             />
-             
-             :
-             <Value onClick={this.toggleState}>${(this.props.rangeBarProps.financialValue).toLocaleString()}</Value>
-            }
-            {/*onBlur is used so that if the user clicks anywhere else on the page it will submit the function */}
-            </div>
+            <Wrapper>
+
+             <Value onClick={this.toggleState}
+             >{
+                 this.props.rangeBarProps.numberType === "percentage" ?
+                 `${(this.props.rangeBarProps.rangeBarValue*100).toFixed(1)} %` :
+                 this.props.rangeBarProps.rangeBarValue
+                }</Value>
+            
+            </Wrapper>
+           
         )
     }
 }
 
 
-
-export default RangeBarValue
+export default MiniRangeBarValue
 
 //-----------------------------------------------STYLES-----------------------------------------------//
 
+const Wrapper = styled.div`
+    display: felx;
+    justify-content: center;
+`
+
 const sharedStyles = `
-    position: absolute;
-    left: 100%;
-    top: .4rem;
-    border-radius: 1px;
-    padding: .6rem;
-    height: 2.7rem;
-    font-size: 1.4rem;
-    width: 9rem;
+    position: relative;
+    border-radius: 3px;
+    padding: .4rem;
+    height: 2.6rem;
+    width: 6rem;
     align-content: center;
     text-align: center;
     color: white;
     border: none;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 `
-
-const ValueAsInput = styled.input`
-        ${sharedStyles}
-        background: ${props => props.theme.color.accent3};
-        z-index: 23;
-        outline: none;
-        ::-webkit-inner-spin-button, 
-        ::-webkit-outer-spin-button { 
-        -webkit-appearance: none; 
-}
-
-
-`
-export const Value = styled.div`
+ const Value = styled.div`
          ${sharedStyles}
         background: ${props => props.theme.color.background3};
-        cursor: pointer;
-    
-}
+        font-size: ${props =>props.theme.fontSize.small};
         &:before {
             content: "";
             height: 1rem;
@@ -98,10 +83,11 @@ export const Value = styled.div`
             background: ${props => props.theme.color.background3};
             position: absolute;
             transform: rotate(45deg);
-            left: -.5rem;
+            left: 40%;
+            top: -20%;
         };
         &:focus {
-           border-bottom: 3px solid ${props => props.theme.color.highlight1};
+           border-bottom: 3px solid ${props => props.theme.color.sandy};
            
         }
 `

@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from "styled-components"
-import {PlusIcon} from "../../../Styles/Icons"
+import {PlusIcon} from "../../Styles/Icons"
 
 export const AddButton = (props) => {
     return (
@@ -34,7 +34,7 @@ const Button = styled.button`
     width: 12rem;
     height: 4rem;
     margin: 1rem;
-    background: ${props => props.theme.color.accent2};
+    background: ${props => props.theme.color.dullSteelBlue};
     color: white;
     cursor: pointer;
     outline: none;

@@ -1,23 +1,35 @@
 import React, { Component } from 'react'
 import styled from "styled-components"
+import {logslider, roundNumber} from "../../services/logorithmicFunctions"
 
 
+class RangeBarSlider extends Component {
 
-class RangeBarInput extends Component {
+    state = {
+        logValue: 0,
+        rangeBarValue: 0
+    }
 
+    setLocalRangeandLogValue = (e) => {
+        const logValue = logslider(e.target.value)
+        this.setState({
+            logValue: roundNumber(logValue), 
+            rangeBarValue: Number(e.target.value)
+        })
+        this.props.handleSetParentRangeBarAndFinancialValue(e.target.name, this.state.logValue, this.state.rangeBarValue, this.props.rangeBarProps)
+    }
 
     render() {
+
         return (
             <Input
                 type="range"
-                onChange={this.props.handleChange}
+                name={this.props.rangeBarProps.name}
+                onChange={(e) => this.setLocalRangeandLogValue(e)}
                 value={this.props.rangeBarProps.rangeBarValue}
                 max={100}
-                step={0.1}
-                id={this.props.rangeBarProps.id}
+                step={1}
                 percentage={`${(this.props.rangeBarProps.rangeBarValue/100)*100}%`}
-                catagory={this.props.rangeBarProps.catagory}
-                autoComplete="off"
             />
         )
     }
@@ -25,7 +37,7 @@ class RangeBarInput extends Component {
 //renders the slide bar. Percentage is calcuated here and pass to styled components to have the slide bar be 
 //two different colors as it moves. 
 
-export default RangeBarInput
+export default RangeBarSlider
 
 //-----------------------------------------------STYLES-----------------------------------------------//
 
@@ -34,12 +46,12 @@ export default RangeBarInput
 
 const Input = styled.input`
 
-    width: 200px;
+    width: 18rem;
     height: 3px;
     -webkit-appearance: none;
     background: linear-gradient(90deg, 
-        ${props => props.catagory === "assets" ? props.theme.color.highlight1 : props.theme.color.highlight2} ${props => props.percentage}, 
-        ${props => props.theme.color.highlight3} ${props => props.percentage});
+        ${props => props.theme.color.sandy} ${props => props.percentage}, 
+        ${props => props.theme.color.dullSteelBlue} ${props => props.percentage});
     outline: none;
     opacity: 0.7;
     -webkit-transition: 0.2s;
@@ -49,17 +61,17 @@ const Input = styled.input`
     transition: all 1s ease;
     &:after {
         content: "";
-            top: 3rem;
-            left: 100%;
+            top: 3.3rem;
+            left: 95%;
             height:.3rem;
-            width: 9rem;
+            width: 8rem;
             background: transparent;
             position: absolute;
             z-index: 3;
     }
     &:active   {
         &:after{
-            background: ${props => props.catagory === "assets" ? props.theme.color.highlight1 : props.theme.color.highlight2};
+            background: ${props => props.theme.color.sandy};
         }
  
         }
@@ -71,14 +83,14 @@ const Input = styled.input`
     appearance: none;
     width: 12px;
     height: 12px;
-    background: ${props => props.theme.color.highlight3};
+    background: ${props => props.theme.color.dullSteelBlue};
     border-radius: 50%;
     cursor: pointer;
 }
 
 &:active::-webkit-slider-thumb
 {
-    background: ${props => props.catagory === "assets" ? props.theme.color.highlight1 : props.theme.color.highlight2};
+    background: ${props => props.theme.color.sandy};
 }
 
 `

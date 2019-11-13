@@ -8,6 +8,7 @@
     "font-awesome": "^4.7.0",
     "fontawesome": "^5.6.3",
     "lodash": "^4.17.15",
+    "materialize-css": "^1.0.0-rc.2",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-fontawesome": "^1.6.1",

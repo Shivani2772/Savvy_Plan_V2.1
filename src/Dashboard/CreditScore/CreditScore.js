@@ -5,12 +5,19 @@ import BadCreditScore from "./BadCreditScore";
 import DonutChart from "../../assets/images/CreditScoreDonut.jpg";
 import BarChart from "../../assets/images/CreditScoreBar.png";
 import GraphChart from "../../assets/images/CreditGraph.png";
+import ProgressArc from "./ProgressArc";
 
 export default class CreditScore extends Component {
   state = {
     Score: 742,
     date: "",
     nextDate: ""
+  };
+  handleChange = e => {
+    this.setState({
+      [e.target.name]: e.target.value
+    });
+    console.log(this.state.creditScore);
   };
 
   componentDidMount() {
@@ -37,32 +44,38 @@ export default class CreditScore extends Component {
     return (
       <CreditScoreWrapper>
         <SectionsWrapper>
-          <DonutBarChart>
-            <h1>Credit Score</h1>
-            <img src={DonutChart} alt="donut" />
-            <p>
-              <u>Score Factors</u>
-            </p>
-            <span>
-              As of {this.state.date}.Based on Credit Vision Risk. Next update
-              available on {this.state.nextDate}{" "}
-            </span>
-          </DonutBarChart>
-          <ProgressBarContainer>
+          <DonutChartWrapper>
+            <ProgressArc></ProgressArc>
+          </DonutChartWrapper>
+          <Vertical></Vertical>
+          <ProgressContainer>
             <h1>Where You Stand</h1>
             {/* <img src={BarChart} alt="bar" /> */}
-            <ProgressBar>
-              <BarLines style="--bar-value:85%;"></BarLines>
-              <Barlines style="--bar-value:45%;"></BarLines>
-              <BarLines style="--bar-value:15%;"></BarLines>
-            </ProgressBar>
-          </ProgressBarContainer>
+            <ProgressBarContainer>
+              <BarLines color="#56bc7b" width="80%">
+                833-900
+              </BarLines>
+              <BarLines color="#ffbf58" width="80%">
+                790-832
+              </BarLines>
+              <BarLines color="#ff7a00" width="60%">
+                <em></em> 749 743-789
+              </BarLines>
+              <BarLines color="#ff4500" width="80%">
+                693-742
+              </BarLines>
+              <BarLines color="#b33000" width="80%">
+                300-692
+              </BarLines>
+            </ProgressBarContainer>
+          </ProgressContainer>
         </SectionsWrapper>
+        <Horizontal></Horizontal>
         <SectionsWrapper>
-          <DonutBarChart>
+          <BottomChartWrapper>
             <h1>My Score History</h1>
             <img src={GraphChart} alt="graph" />
-          </DonutBarChart>
+          </BottomChartWrapper>
         </SectionsWrapper>
       </CreditScoreWrapper>
     );
@@ -78,17 +91,15 @@ const CreditScoreWrapper = styled.div`
 
 const SectionsWrapper = styled.div`
   margin: 0rem auto;
+  padding: 3rem;
   width: 100rem;
   display: flex;
-  flex-direction: row;
+  font-size: ${props => props.theme.fontSize.medium};
+  color: ${props => props.theme.color.contrastText1};
+  font-weight: 300;
 `;
 
-const DonutBarChart = styled.div`
-  font-size: ${props => props.theme.fontSize.medium};
-  color: ${props => props.theme.color.text2};
-  font-weight: 300;
-  padding: 3rem;
-  display: flex;
+const DonutChartWrapper = styled.div`
   flex-direction: column;
   & h1 {
     font-size: ${props => props.theme.fontSize.medium};
@@ -102,24 +113,42 @@ const DonutBarChart = styled.div`
     flex: 1 1 250px;
   }
 `;
+const Vertical = styled.div`
+  border-left: 2px solid #72929b;
+  height: 350px;
+  position: absolute;
+  left: 50%;
+`;
+const Horizontal = styled.div`
+  margin:auto
+width: 80%;
+border-top: 2px solid #72929b;
 
-const ProgressBarContainer = styled(DonutBarChart)``;
+`;
 
-const ProgressBar = styled.div`
+const ProgressContainer = styled(DonutChartWrapper)`
   width: 100%;
   height: 100%;
   display: flex;
-  flex-direction: row;
-  justify-content: centre;
-  border-bottom: 2px solid #f16335;
+  flex-direction: column;
+
+  /*   border-bottom: 2px solid #f16335;
+ */
+`;
+const ProgressBarContainer = styled(ProgressContainer)`
+  margin: 1rem 0px 0px 80px;
 `;
 
-const BarLines = styled(ProgressBar)`
-  background-color: #f16335;
-  width: 45px;
-  height: var(--bar-value);
-  align-self: flex-end;
-  margin: 0 auto;
+const BarLines = styled(ProgressBarContainer)`
+  background-color: ${props => props.color};
+  color: ${props => props.theme.color.text2}
+  width: ${props => props.width};
+  height: 50%;
+  margin: 5px;
+  padding:1rem;
   border-radius: 3px;
   position: relative;
+
 `;
+
+const BottomChartWrapper = styled(DonutChartWrapper)``;

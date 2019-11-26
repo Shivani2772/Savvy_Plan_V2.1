@@ -87,7 +87,7 @@ const CreditScoreWrapper = styled.div`
 `;
 
 const SectionsWrapper = styled.div`
-  margin: 0 auto;
+  margin: 0rem auto;
   padding: 3rem;
   width: 100rem;
   display: flex;

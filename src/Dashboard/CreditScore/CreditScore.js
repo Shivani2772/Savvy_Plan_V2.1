@@ -2,10 +2,8 @@ import React, { Component } from "react";
 import styled from "styled-components";
 import GoodCreditScore from "./GoodCreditScore";
 import BadCreditScore from "./BadCreditScore";
-import DonutChart from "../../assets/images/CreditScoreDonut.jpg";
-import BarChart from "../../assets/images/CreditScoreBar.png";
-import GraphChart from "../../assets/images/CreditGraph.png";
 import ProgressArc from "./ProgressArc";
+import LineGraph from "./LineGraph";
 
 export default class CreditScore extends Component {
   state = {
@@ -17,7 +15,6 @@ export default class CreditScore extends Component {
     this.setState({
       [e.target.name]: e.target.value
     });
-    console.log(this.state.creditScore);
   };
 
   componentDidMount() {
@@ -45,12 +42,15 @@ export default class CreditScore extends Component {
       <CreditScoreWrapper>
         <SectionsWrapper>
           <DonutChartWrapper>
-            <ProgressArc></ProgressArc>
+            <ProgressArc Score={this.state.Score} />
+            <span>
+              As of {this.state.date}.Based on Credit Vision Risk. Next update
+              available on {this.state.nextDate}{" "}
+            </span>
           </DonutChartWrapper>
           <Vertical></Vertical>
           <ProgressContainer>
             <h1>Where You Stand</h1>
-            {/* <img src={BarChart} alt="bar" /> */}
             <ProgressBarContainer>
               <BarLines color="#56bc7b" width="80%">
                 833-900
@@ -72,10 +72,7 @@ export default class CreditScore extends Component {
         </SectionsWrapper>
         <Horizontal></Horizontal>
         <SectionsWrapper>
-          <BottomChartWrapper>
-            <h1>My Score History</h1>
-            <img src={GraphChart} alt="graph" />
-          </BottomChartWrapper>
+          <LineGraph></LineGraph>
         </SectionsWrapper>
       </CreditScoreWrapper>
     );
@@ -90,7 +87,7 @@ const CreditScoreWrapper = styled.div`
 `;
 
 const SectionsWrapper = styled.div`
-  margin: 0rem auto;
+  margin: 0 auto;
   padding: 3rem;
   width: 100rem;
   display: flex;
@@ -150,5 +147,3 @@ const BarLines = styled(ProgressBarContainer)`
   position: relative;
 
 `;
-
-const BottomChartWrapper = styled(DonutChartWrapper)``;

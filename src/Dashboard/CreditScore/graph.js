@@ -10,42 +10,10 @@ export default class Section422 extends Component {
   }
   drawArc(dims, cent) {
     const svg = d3
-      .select(".canvas")
+      .select(this.refs.canvas)
       .append("svg")
       .attr("width", dims.width + 150)
       .attr("height", dims.height + 150);
-
-    const graph = svg
-      .append("g")
-      .attr("transform", `translate(${cent.x}, ${cent.y})`);
-
-    const pie = d3
-      .pie()
-      .sort(null)
-      .value(d => d.cost);
-
-    const arcPath = d3
-      .arc()
-      .outerRadius(dims.radius)
-      .innerRadius(dims.radius / 4);
-    const data =
-      ({ name: "rent", cost: 500 },
-      { name: "bills", cost: 300 },
-      { name: "gaming", cost: 200 });
-    //update function
-    const update = data => {
-      //join enhanced (pie) data to path elements
-      const paths = graph.selectAll("path").data(pie(data));
-
-      paths
-        .enter()
-        .append("path")
-        .attr("class", "arc")
-        .attr("d", arcPath)
-        .attr("stroke", "#fff")
-        .attr("stroke-widht", 3);
-    };
-    update(data);
   }
 
   render() {

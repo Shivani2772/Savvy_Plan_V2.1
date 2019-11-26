@@ -5,20 +5,37 @@ import styled from "styled-components";
 export default class ProgressArc extends Component {
   constructor() {
     super();
-    this.state = {
+    /* this.state = {
       value: 70
-    };
+    }; */
+
     this.ref = React.createRef();
   }
 
   componentDidMount() {
-    this.drawArc();
+    const dims = { height: 300, width: 300, radius: 150 };
+    const cent = { x: dims.width / 2, y: dims.height / 2 };
+    const color = ["#f2503f", "#ea0859", "#404F70"];
+    const data = [this.props.Score];
+    this.drawArc(dims, cent, data, color);
   }
 
-  drawArc() {
+  drawArc(dims, cent, data, color) {
     const context = this.setContext();
     this.setBackground(context);
     this.setForeground(context);
+    this.setText(context);
+  }
+  setText(context) {
+    return context
+      .append("text")
+      .text(this.props.Score)
+      .attr("class", "arc")
+      .attr("text-anchor", "middle")
+      .attr("dy", 27)
+      .attr("dx", 12)
+      .attr("fill", "blue")
+      .attr("font-size", 40);
   }
 
   setContext() {
@@ -26,7 +43,7 @@ export default class ProgressArc extends Component {
       .select(this.refs.arc)
       .append("svg")
       .attr("height", 300)
-      .attr("height", 300)
+      .attr("width", 300)
       .attr("id", "d3-arc")
       .append("g")
       .attr("transform", `translate(150,150)`);
@@ -52,7 +69,7 @@ export default class ProgressArc extends Component {
   setForeground(context) {
     return context
       .append("path")
-      .datum({ endAngle: this.tau * 0.3 })
+      .datum({ endAngle: this.tau * (this.props.Score / 1000) })
       .style("fill", "#00ff00")
       .attr("d", this.arc());
   }
@@ -67,11 +84,11 @@ export default class ProgressArc extends Component {
   }
 }
 
-const WidgetWrapper = styled.div`
+const WidgetWrapper = styled.section`
   margin: 0 auto;
   width: 350px;
 `;
-const HeaderWrapper = styled.section`
+const HeaderWrapper = styled.div`
   font-size: ${props => props.theme.fontSize.medium};
   font-weight: normal;
   & .chart-container {
